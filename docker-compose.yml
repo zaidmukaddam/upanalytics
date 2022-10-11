@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: "UPAnalytics-db"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=upanalytics
+      - MYSQL_USER=upanalytics
+      - MYSQL_PASSWORD=upanalytics
+
+  app:
+    build: .
+    container_name: "UPAnalytics-app"
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    command: sh -c "/bin/wait && /app/upanalytics"
+    environment:
+      - WAIT_HOSTS=db:3306
+      - WAIT_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30

@@ -1,0 +1,14 @@
+[server]
+host = "0.0.0.0"
+port = 9000
+url = "http://localhost:9000"
+
+[database]
+server = "db"
+port = 3306
+user = "upanalytics"
+password = "upanalytics"
+database = "upanalytics"
+
+[crawler]
+agent = "UPAnalytics Bot"
